@@ -129,19 +129,19 @@ scanner.nextLine();
          //Call methos writeEnvelope
          writeEnvelope((Message) p);
 
-     // System.out.println("----------------------------");
-   //   System.out.println("CONTENT-TYPE: " + p.getContentType());
+      System.out.println("----------------------------");
+     System.out.println("CONTENT-TYPE: " + p.getContentType());
 
       //check if the content is plain text
       if (p.isMimeType("text/plain")) {
-       /*  System.out.println("This is plain text");
+         System.out.println("This is plain text");
          System.out.println("---------------------------");
-          System.out.println((String)p.getContent());*/
+          System.out.println((String)p.getContent());
       }
       //check if the content has attachment
       else if (p.isMimeType("multipart/*")) {
-      /*   System.out.println("This is a Multipart");
-         System.out.println("---------------------------");*/
+        System.out.println("This is a Multipart");
+         System.out.println("---------------------------");
          Multipart mp = (Multipart) p.getContent();
          int count = mp.getCount();
          for (int i = 0; i < count; i++)
@@ -149,17 +149,17 @@ scanner.nextLine();
       } 
       //check if the content is a nested message
       else if (p.isMimeType("message/rfc822")) {
-       /*  System.out.println("This is a Nested Message");
-         System.out.println("---------------------------");*/
+        System.out.println("This is a Nested Message");
+         System.out.println("---------------------------");
          writePart((Part) p.getContent());
       } 
       //check if the content is an inline image
       else if (p.isMimeType("image/jpeg")) {
-      //   System.out.println("--------> image/jpeg");
+         System.out.println("--------> image/jpeg");
          Object o = p.getContent();
          InputStream x = (InputStream) o;
          // Construct the required byte array
-      //   System.out.println("x.length = " + x.available());
+         System.out.println("x.length = " + x.available());
           int i = 0;
          byte[] bArray = new byte[x.available()];
          while ((i = (int) ((InputStream) x).available()) > 0) {
@@ -173,7 +173,7 @@ scanner.nextLine();
          f2.write(bArray);
       } 
       else if (p.getContentType().contains("image/")) {
-       //  System.out.println("content type" + p.getContentType());
+        System.out.println("content type" + p.getContentType());
          File f = new File("image" + new Date().getTime() + ".jpg");
          DataOutputStream output = new DataOutputStream(
             new BufferedOutputStream(new FileOutputStream(f)));
@@ -190,10 +190,10 @@ scanner.nextLine();
         
          Object o = p.getContent();
          if (o instanceof String) {
-           /* System.out.println("This is a string");
-            System.out.println("---------------------------");*/
+            System.out.println("This is a string");
+            System.out.println("---------------------------");
             
-             
+             //Extract html page and retrieve item table
              Document doc =Jsoup.parse((String)p.getContent());
               Element table = doc.select("table").get(2);
                 Elements rows = table.select("tr");
@@ -205,8 +205,8 @@ scanner.nextLine();
         }
      
          else if (o instanceof InputStream) {
-         /*   System.out.println("This is just an input stream");
-            System.out.println("---------------------------");*/
+            System.out.println("This is just an input stream");
+            System.out.println("---------------------------");
             InputStream is = (InputStream) o;
             is = (InputStream) o;
             int c;
@@ -214,7 +214,7 @@ scanner.nextLine();
                System.out.write(c);
          } 
          else {
-         /*   System.out.println("This is an unknown type");
+            System.out.println("This is an unknown type");
             System.out.println("---------------------------");
             System.out.println(o.toString());*/
          }
@@ -225,13 +225,13 @@ scanner.nextLine();
    * This method would print FROM,TO and SUBJECT of the message
    */
    public static void writeEnvelope(Message m) throws Exception {
-   /*   System.out.println("This is the message envelope");
-      System.out.println("---------------------------");*/
+     System.out.println("This is the message envelope");
+      System.out.println("---------------------------");
       Address[] a;
       
       
 
-    /*  // FROM
+     // FROM
       if ((a = m.getFrom()) != null) {
          for (int j = 0; j < a.length; j++)
          System.out.println("FROM: " + a[j].toString());
@@ -244,7 +244,7 @@ scanner.nextLine();
       }
     //SUBJECT
       if (m.getSubject() != null)
-          subject = m.getSubject();*/
+          subject = m.getSubject();
 
    }
 }
